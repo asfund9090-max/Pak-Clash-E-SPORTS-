@@ -8,7 +8,7 @@
         :root { --primary: #3498db; --bg-dark: #070913; --bg-card: #0f172a; --text-main: #fff; --text-muted: #94a3b8; --accent-red: #e74c3c; --accent-green: #2ecc71; --accent-yellow: #f1c40f; }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: var(--bg-dark); color: var(--text-main); min-height: 100vh; display: flex; justify-content: center; align-items: center; padding: 15px; }
-        .container { width: 100%; max-width: 440px; background: var(--bg-card); padding: 16px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.6); position: relative; padding-bottom: 70px; }
+        .container { width: 100%; max-width: 440px; background: var(--bg-card); padding: 16px; border-radius: 16px; box-shadow: 0 8px 24px rgba(0,0,0,0.6); position: relative; padding-bottom: 80px; min-height: 650px; }
         
         /* Header Top */
         .header-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #1e293b; }
@@ -18,8 +18,8 @@
         .sub-logo { font-size: 11px; color: var(--accent-green); font-weight: 600; }
         .diamond-badge { background: #1e293b; border: 1px solid #334155; padding: 5px 10px; border-radius: 20px; font-size: 13px; font-weight: bold; color: #38bdf8; display: flex; align-items: center; gap: 5px; }
 
-        /* Bottom Navbar */
-        .bottom-nav { position: absolute; bottom: 0; left: 0; width: 100%; background: #0b1120; border-top: 1px solid #1e293b; display: flex; justify-content: space-around; padding: 10px 0; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; z-index: 10; }
+        /* Bottom Navbar - Fixed */
+        .bottom-nav { position: absolute; bottom: 0; left: 0; width: 100%; background: #0b1120; border-top: 1px solid #1e293b; display: flex; justify-content: space-around; padding: 10px 0; border-bottom-left-radius: 16px; border-bottom-right-radius: 16px; z-index: 100; }
         .nav-item { background: none; border: none; color: var(--text-muted); font-size: 12px; font-weight: bold; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; }
         .nav-item.active { color: var(--primary); }
 
@@ -43,17 +43,33 @@
         .event-banner { background: linear-gradient(135deg, #1e293b, #0f172a); border: 1px solid #334155; padding: 16px; border-radius: 12px; margin-bottom: 14px; text-align: center; }
         .event-tag { background: #d97706; color: white; font-size: 10px; font-weight: bold; padding: 3px 8px; border-radius: 4px; display: inline-block; margin-bottom: 6px; text-transform: uppercase; }
         .event-title { font-size: 18px; font-weight: bold; color: var(--text-main); margin-bottom: 6px; }
-        .event-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; line-height: 1.4; }
+        .event-desc { font-size: 12px; color: var(--text-muted); margin-bottom: 10px; line-height: 1.4; }
+        .event-timing { font-size: 11px; color: var(--accent-yellow); font-weight: bold; margin-bottom: 10px; }
         .event-btn { background: linear-gradient(135deg, #e74c3c, #c0392b); border: none; width: 100%; padding: 10px; color: white; font-weight: bold; border-radius: 8px; cursor: pointer; font-size: 14px; }
 
         .category-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 14px; }
-        .cat-card { background: #1e293b; border: 1px solid #334155; padding: 10px 5px; border-radius: 8px; text-align: center; font-size: 12px; font-weight: bold; color: var(--text-main); }
+        .cat-card { background: #1e293b; border: 1px solid #334155; padding: 12px 5px; border-radius: 8px; text-align: center; font-size: 12px; font-weight: bold; color: var(--text-main); cursor: pointer; transition: 0.2s; }
+        .cat-card.active { border-color: var(--primary); background: #1e293b; color: var(--primary); }
         
-        .section-title { font-size: 14px; font-weight: bold; color: var(--primary); margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
-        .match-card { background: #1e293b; border: 1px solid #334155; padding: 12px; border-radius: 8px; margin-bottom: 10px; }
+        /* Match Sub-Interface views */
+        .match-view-panel { display: none; background: #1e293b; border: 1px solid #334155; padding: 14px; border-radius: 10px; margin-bottom: 14px; }
+        .match-view-panel.active { display: block; }
+        .coming-soon { color: var(--accent-yellow); font-weight: bold; padding: 20px 0; font-size: 14px; text-align: center; }
+
+        .match-card { background: #0f172a; border: 1px solid #334155; padding: 12px; border-radius: 8px; margin-bottom: 10px; }
         .match-title { font-size: 14px; font-weight: bold; color: var(--text-main); margin-bottom: 3px; }
-        .match-info { font-size: 11px; color: var(--text-muted); margin-bottom: 8px; display: flex; justify-content: space-between; }
+        .match-info { font-size: 11px; color: var(--text-muted); margin-bottom: 6px; display: flex; justify-content: space-between; }
+        .slots-info { font-size: 11px; color: var(--accent-green); font-weight: bold; margin-bottom: 8px; }
         .match-btn { background: var(--primary); border: none; width: 100%; padding: 8px; color: white; font-weight: bold; border-radius: 6px; cursor: pointer; font-size: 13px; }
+
+        /* Modal Popup for Tournament Interface / Participants */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; padding: 15px; }
+        .modal-content { background: var(--bg-card); border: 1px solid #334155; width: 100%; max-width: 400px; border-radius: 12px; padding: 16px; max-height: 80vh; overflow-y: auto; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px solid #1e293b; padding-bottom: 8px; }
+        .modal-title { font-size: 15px; font-weight: bold; color: var(--primary); }
+        .close-modal { background: none; border: none; color: var(--text-muted); font-size: 18px; cursor: pointer; }
+        .participant-item { background: #1e293b; padding: 8px 10px; border-radius: 6px; margin-bottom: 6px; display: flex; justify-content: space-between; font-size: 12px; }
+        .participant-item span { color: var(--accent-yellow); font-weight: bold; }
 
         /* Wallet / Deposit & Withdrawal Center */
         .wallet-header { background: #1e293b; border: 1px solid #334155; padding: 12px; border-radius: 10px; text-align: center; margin-bottom: 12px; }
@@ -88,8 +104,8 @@
 
         <div id="loginPanel" class="panel active">
             <div class="form-group">
-                <label>Full Name</label>
-                <input type="text" id="loginName" placeholder="Enter your name">
+                <label>Phone Number / Name</label>
+                <input type="text" id="loginName" placeholder="Enter phone or name">
             </div>
             <div class="form-group">
                 <label>Password</label>
@@ -139,27 +155,32 @@
                 <div class="event-tag">🔥 Special Event</div>
                 <div class="event-title">THE ULTIMATE COMEBACK</div>
                 <div class="event-desc">Apne purane doston ko wapas laayein! Is massive comeback event ki entry bilkul free hai.</div>
-                <button type="button" class="event-btn" onclick="alert('Comeback event registered successfully!')">Join Free Comeback Now</button>
+                <div class="event-timing">🕒 Every Sunday | Starts at 3:10 PM (Reporting: 3:00 PM)</div>
+                <button type="button" class="event-btn" onclick="openTournamentModal('The Ultimate Comeback (Free)', 50)">View Tournament & Join</button>
             </div>
 
             <div class="category-grid">
-                <div class="cat-card">⚔️ Per Kill</div>
-                <div class="cat-card">👑 Survival</div>
-                <div class="cat-card">⚡ CS Matches</div>
+                <div class="cat-card active" id="catPerKillBtn">⚔️ Per Kill</div>
+                <div class="cat-card" id="catSurvivalBtn">👑 Survival</div>
+                <div class="cat-card" id="catCsBtn">⚡ CS Matches</div>
             </div>
 
-            <div class="section-title">⚡ Live & Upcoming Matches</div>
-            
-            <div class="match-card">
-                <div class="match-title">BR Per Kill Battle</div>
-                <div class="match-info"><span>Map: Bermuda | TPP</span> <span style="color:var(--accent-yellow);">Per Kill: 30 PKR</span></div>
-                <button type="button" class="match-btn" onclick="alert('Joined BR Per Kill Battle!')">Join Match</button>
+            <!-- Category Sub-Interfaces -->
+            <div id="perKillView" class="match-view-panel active">
+                <div class="match-card">
+                    <div class="match-title">BR Per Kill Battle</div>
+                    <div class="match-info"><span>Map: Bermuda | TPP</span> <span style="color:var(--accent-yellow);">Per Kill: 30 PKR</span></div>
+                    <div class="slots-info" id="slots_perkill">Slots Joined: 0 / 50</div>
+                    <button type="button" class="match-btn" onclick="openTournamentModal('BR Per Kill Battle', 50)">View & Join Match</button>
+                </div>
             </div>
 
-            <div class="match-card">
-                <div class="match-title">BR Solo Championship</div>
-                <div class="match-info"><span>Map: Purgatory | Solo</span> <span style="color:var(--accent-green);">Prize: 1500 PKR</span></div>
-                <button type="button" class="match-btn" style="background:var(--accent-red);" onclick="alert('Joined Solo Championship!')">Join Match</button>
+            <div id="survivalView" class="match-view-panel">
+                <div class="coming-soon">⏳ Coming Soon! No survival matches active right now.</div>
+            </div>
+
+            <div id="csView" class="match-view-panel">
+                <div class="coming-soon">⏳ Coming Soon! Clash Squad matches will be available shortly.</div>
             </div>
         </div>
 
@@ -237,7 +258,7 @@
 
             <div class="info-card">
                 <h4>📜 Rule Book & Fair Play</h4>
-                <p>1. All match results must be submitted with valid screenshots.<br>2. Any form of hacking or teaming will result in permanent ban.<br>3. Fair play is strictly enforced.</p>
+                <p>1. All match results must be submitted with valid screenshots.<br>2. Any form of hacking or teaming will result in permanent ban.<br>3. Fair play is strictly enforced.<br>4. Sunday Matches: Time 3:10 PM Sharp (Reporting 3:00 PM).</p>
             </div>
 
             <div class="info-card">
@@ -249,7 +270,7 @@
             <button type="button" class="logout-btn" id="logoutBtn">Logout</button>
         </div>
 
-        <!-- Bottom Navigation Bar -->
+        <!-- Bottom Navigation Bar - Fixed -->
         <div class="bottom-nav">
             <button type="button" class="nav-item active" id="navHome">
                 <span>🏠</span>
@@ -266,205 +287,38 @@
         </div>
     </div>
 </div>
+
+<!-- Tournament & Participants Modal -->
+<div id="tournamentModal" class="modal-overlay">
+    <div class="modal-content">
+        <div class="modal-header">
+            <div class="modal-title" id="modalTournamentTitle">Tournament Details</div>
+            <button type="button" class="close-modal" id="closeModalBtn">&times;</button>
+        </div>
+        <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">
+            <div>📅 Schedule: Every Sunday</div>
+            <div>⏰ Reporting: 3:00 PM | Start: 3:10 PM</div>
+            <div id="modalSlotsCount" style="color: var(--accent-green); font-weight: bold; margin-top: 4px;">Slots: 0 / 50</div>
+        </div>
+        <button type="button" class="submit-btn" id="joinTournamentBtn" style="margin-bottom: 12px;">Join This Tournament</button>
+        
+        <div style="font-size: 13px; font-weight: bold; color: var(--text-main); margin-bottom: 6px;">👥 Registered Players:</div>
+        <div id="participantsListContainer" style="max-height: 180px; overflow-y: auto;">
+            <!-- Participants injected dynamically -->
+        </div>
+    </div>
+</div>
+
 <script>
     const ADMIN_PHONE = "03714327978";
+    let activeTournamentName = "";
+    let maxTournamentSlots = 50;
+
+    let users = JSON.parse(localStorage.getItem('pc_users')) || [];
+    let currentUser = JSON.parse(localStorage.getItem('pc_currentUser')) || null;
+    let registrations = JSON.parse(localStorage.getItem('pc_registrations')) || {};
 
     const loginTabBtn = document.getElementById('loginTabBtn');
     const registerTabBtn = document.getElementById('registerTabBtn');
     const loginPanel = document.getElementById('loginPanel');
-    const registerPanel = document.getElementById('registerPanel');
-    const authWrapper = document.getElementById('authWrapper');
-    const mainAppContainer = document.getElementById('mainAppContainer');
-
-    const navHome = document.getElementById('navHome');
-    const navWallet = document.getElementById('navWallet');
-    const navProfile = document.getElementById('navProfile');
-    const homePanel = document.getElementById('homePanel');
-    const walletPanel = document.getElementById('walletPanel');
-    const profilePanel = document.getElementById('profilePanel');
-
-    function switchAuthTab(tab) {
-        if (tab === 'login') {
-            loginTabBtn.classList.add('active');
-            registerTabBtn.classList.remove('active');
-            loginPanel.classList.add('active');
-            registerPanel.classList.remove('active');
-        } else {
-            registerTabBtn.classList.add('active');
-            loginTabBtn.classList.remove('active');
-            registerPanel.classList.add('active');
-            loginPanel.classList.remove('active');
-        }
-    }
-
-    loginTabBtn.addEventListener('click', () => switchAuthTab('login'));
-    registerTabBtn.addEventListener('click', () => switchAuthTab('register'));
-
-    function switchTab(tab) {
-        navHome.classList.remove('active');
-        navWallet.classList.remove('active');
-        navProfile.classList.remove('active');
-        homePanel.classList.remove('active');
-        walletPanel.classList.remove('active');
-        profilePanel.classList.remove('active');
-
-        if (tab === 'home') {
-            navHome.classList.add('active');
-            homePanel.classList.add('active');
-        } else if (tab === 'wallet') {
-            navWallet.classList.add('active');
-            walletPanel.classList.add('active');
-        } else if (tab === 'profile') {
-            navProfile.classList.add('active');
-            profilePanel.classList.add('active');
-        }
-    }
-
-    navHome.addEventListener('click', () => switchTab('home'));
-    navWallet.addEventListener('click', () => switchTab('wallet'));
-    navProfile.addEventListener('click', () => switchTab('profile'));
-
-    function loadAdminDropdown(users) {
-        const select = document.getElementById('adminUserSelect');
-        if (!select) return;
-        select.innerHTML = '';
-        users.forEach(u => {
-            let opt = document.createElement('option');
-            opt.value = u.phone;
-            opt.innerText = `${u.name} (UID: ${u.uid}) - 💎 ${u.balance || 0}`;
-            select.appendChild(opt);
-        });
-    }
-
-    function checkLoginState() {
-        const currentPhone = localStorage.getItem('pakClashCurrentPhone');
-        let users = JSON.parse(localStorage.getItem('pakClashUsers') || '[]');
-        
-        if (currentPhone) {
-            let user = users.find(u => u.phone === currentPhone);
-            if (user) {
-                authWrapper.style.display = 'none';
-                mainAppContainer.style.display = 'block';
-                
-                document.getElementById('headerDiamonds').innerText = user.balance || 0;
-                document.getElementById('profName').innerText = user.name;
-                document.getElementById('profPhone').innerText = user.phone;
-                document.getElementById('profUid').innerText = user.uid;
-
-                const adminSection = document.getElementById('adminSection');
-                if (user.phone === ADMIN_PHONE) {
-                    adminSection.style.display = 'block';
-                    loadAdminDropdown(users);
-                } else {
-                    adminSection.style.display = 'none';
-                }
-            } else {
-                authWrapper.style.display = 'block';
-                mainAppContainer.style.display = 'none';
-            }
-        } else {
-            authWrapper.style.display = 'block';
-            mainAppContainer.style.display = 'none';
-        }
-    }
-
-    document.getElementById('regBtn').addEventListener('click', () => {
-        let name = document.getElementById('regName').value.trim();
-        let phone = document.getElementById('regPhone').value.trim();
-        let pass = document.getElementById('regPass').value.trim();
-        let msg = document.getElementById('regMsg');
-
-        if (!name || !phone || !pass) {
-            msg.innerText = "Please fill all fields!";
-            return;
-        }
-
-        let users = JSON.parse(localStorage.getItem('pakClashUsers') || '[]');
-        if (users.some(u => u.phone === phone)) {
-            msg.innerText = "Phone number already registered!";
-            return;
-        }
-
-        let newUser = {
-            name: name,
-            phone: phone,
-            pass: pass,
-            uid: Math.floor(100000 + Math.random() * 900000),
-            balance: 0
-        };
-
-        users.push(newUser);
-        localStorage.setItem('pakClashUsers', JSON.stringify(users));
-        localStorage.setItem('pakClashCurrentPhone', phone);
-        msg.style.color = "var(--accent-green)";
-        msg.innerText = "Registration successful!";
-        setTimeout(() => checkLoginState(), 800);
-    });
-
-    document.getElementById('loginBtn').addEventListener('click', () => {
-        let name = document.getElementById('loginName').value.trim();
-        let pass = document.getElementById('loginPass').value.trim();
-        let msg = document.getElementById('loginMsg');
-
-        if (!name || !pass) {
-            msg.innerText = "Please fill all fields!";
-            return;
-        }
-
-        let users = JSON.parse(localStorage.getItem('pakClashUsers') || '[]');
-        let user = users.find(u => u.name.toLowerCase() === name.toLowerCase() && u.pass === pass);
-
-        if (user) {
-            localStorage.setItem('pakClashCurrentPhone', user.phone);
-            msg.style.color = "var(--accent-green)";
-            msg.innerText = "Login successful!";
-            setTimeout(() => checkLoginState(), 800);
-        } else {
-            msg.style.color = "var(--accent-red)";
-            msg.innerText = "Invalid name or password!";
-        }
-    });
-
-    document.getElementById('logoutBtn').addEventListener('click', () => {
-        localStorage.removeItem('pakClashCurrentPhone');
-        checkLoginState();
-    });
-
-    document.getElementById('adminAddBtn').addEventListener('click', () => {
-        let targetPhone = document.getElementById('adminUserSelect').value;
-        let amount = parseInt(document.getElementById('adminAmount').value);
-        if (!amount || amount <= 0) {
-            alert('Please enter a valid amount');
-            return;
-        }
-        let users = JSON.parse(localStorage.getItem('pakClashUsers') || '[]');
-        let user = users.find(u => u.phone === targetPhone);
-        if (user) {
-            user.balance = (user.balance || 0) + amount;
-            localStorage.setItem('pakClashUsers', JSON.stringify(users));
-            alert(`Successfully added ${amount} diamonds to ${user.name}`);
-            checkLoginState();
-        }
-    });
-
-    document.getElementById('adminSubBtn').addEventListener('click', () => {
-        let targetPhone = document.getElementById('adminUserSelect').value;
-        let amount = parseInt(document.getElementById('adminAmount').value);
-        if (!amount || amount <= 0) {
-            alert('Please enter a valid amount');
-            return;
-        }
-        let users = JSON.parse(localStorage.getItem('pakClashUsers') || '[]');
-        let user = users.find(u => u.phone === targetPhone);
-        if (user) {
-            user.balance = Math.max(0, (user.balance || 0) - amount);
-            localStorage.setItem('pakClashUsers', JSON.stringify(users));
-            alert(`Successfully deducted ${amount} diamonds from ${user.name}`);
-            checkLoginState();
-        }
-    });
-
-    checkLoginState();
-</script>
-</body>
-</html>
+    const re
